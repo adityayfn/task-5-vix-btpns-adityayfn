@@ -1,6 +1,10 @@
 package controllers
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 
 type AuthController interface{
@@ -16,13 +20,13 @@ func NewAuthController() AuthController{
 	return &authController{}
 }
 func(c *authController)Login(ctx *gin.Context){
-	ctx.JSON(http.StatusOk,gin.H{
+	ctx.JSON(http.StatusOK,gin.H{
 		"message" : "Hello Login",
 	})
 }
 
 func(c *authController)Register(ctx *gin.Context){
-	ctx.JSON(http.StatusOk,gin.H{
+	ctx.JSON(http.StatusOK,gin.H{
 		"message" : "Hello Register",
 	})
 }
