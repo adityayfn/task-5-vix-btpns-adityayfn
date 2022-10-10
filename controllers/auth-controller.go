@@ -15,9 +15,13 @@ func NewAuthController() AuthController{
 	return &authController{}
 }
 func(c *authController)Login(ctx *gin.Context){
-	
+	ctx.JSON(http.StatusOk,gin H{
+		"message" : "Hello Login"
+	})
 }
 
 func(c *authController)Register(ctx *gin.Context){
-
+	ctx.JSON(http.StatusOk,gin H{
+		"message" : "Hello Register"
+	})
 }

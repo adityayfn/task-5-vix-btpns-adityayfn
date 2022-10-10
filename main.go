@@ -1,11 +1,10 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-	""
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/router"
 )
+
+
 
 func main (){
 	r := router.InitRoutes()
