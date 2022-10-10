@@ -1,16 +1,17 @@
 package router
 
 import (
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/controllers"
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/database"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 var 
-{
-	db *gorm.DB = config.SetupDbConnection()
-	authController controllerAuthController = controller.NewAuthController()
-
-
-}
+(
+	db *gorm.DB = database.SetupDbConnection()
+	authController controllers.AuthController = controllers.NewAuthController()
+)
 
 func InitRoutes() *gin.Engine {
 	router := gin.Default()
