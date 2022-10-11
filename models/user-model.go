@@ -7,6 +7,6 @@ type UserUpdateModel struct {
 	Username string `json:"username" form:"username" binding:"required"`
 	Email    string `json:"email" form:"email" binding:"required" validate:"email"`
 	Password string `json:"password,omitempty" form:"password,omitempty" validate:"min:6" binding:"required"`
-	CreatedAt time.Time `gorm:"<-:create"`
-	UpdatedAt time.Time
+	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
