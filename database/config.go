@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/app"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -29,9 +30,9 @@ func SetupDbConnection() *gorm.DB {
 	if err != nil {
 		panic("Failed to connect to database")
 	}
-
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&app.Photo{}, &app.User{})
 	// db.AutoMigrate(&app.Photo{}, &app.User{})
-	// println("Database connected!")
+	println("Database connected!")
 	return db
 }
 // CloseDbConnection 

@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/controllers"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/database"
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/middlewares"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/repository"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/service"
 	"github.com/gin-gonic/gin"
@@ -15,7 +16,9 @@ var
 	userRepository  repository.UserRepository   = repository.NewUserRepository(db)
 	jwtService      service.JWTService          = service.NewJWTService()	
 	authService     service.AuthService         = service.NewAuthService(userRepository)
+	userService     service.UserService         = service.NewUserService(userRepository)
 	authController  controllers.AuthController  = controllers.NewAuthController(authService, jwtService)
+	userController  controllers.UserController  = controllers.NewUserController(userService, jwtService)
 )
 
 func InitRoutes() *gin.Engine {
@@ -27,11 +30,11 @@ func InitRoutes() *gin.Engine {
 		authRoutes.POST("/register", authController.Register)
 	}
 
-	// userRoutes := router.Group("user", middlewares.AuthorizeJWT(jwtService))
-	// {
-	// 	userRoutes.GET("/profile", userController.Profile)
-	// 	userRoutes.PUT("/profile", userController.Update)
-	// }
+	userRoutes := router.Group("users", middlewares.AuthorizeJWT(jwtService))
+	{
+		userRoutes.GET("/profile", userController.Profile)
+		userRoutes.PUT("/profile", userController.Update)
+	}
 
 	// photoRoutes := router.Group("photos", middlewares.AuthorizeJWT(jwtService))
 	// {

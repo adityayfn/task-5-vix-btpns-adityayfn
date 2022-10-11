@@ -9,6 +9,6 @@ type User struct {
 	Password string `gorm:"->;<-; not null" json:"-" binding:"required"`
 	Token    string `gorm:"-" json:"token,omitempty"`
 	Photos    *[]Photo `gorm:"constraint:OnUpdate:CASCADE, OnDelete:CASCADE" json:"photos,omitempty"`
-	CreatedAt time.Time `json:"-" gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
-	UpdatedAt time.Time `json:"-" gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
+	CreatedAt time.Time `json:"-" json:"created_at"`
+	UpdatedAt time.Time `json:"-" json:"updated_at"`
 }
