@@ -10,7 +10,7 @@ import (
 var 
 (
 	db *gorm.DB = database.SetupDbConnection()
-	authController controllers.AuthController = controllers.NewAuthController()
+	authController  controllers.AuthController  = controllers.NewAuthController(authService, jwtService)
 )
 
 func InitRoutes() *gin.Engine {
