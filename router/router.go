@@ -3,6 +3,8 @@ package router
 import (
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/controllers"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/database"
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/repository"
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/service"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -10,6 +12,9 @@ import (
 var 
 (
 	db *gorm.DB = database.SetupDbConnection()
+	userRepository  repository.UserRepository   = repository.NewUserRepository(db)
+	jwtService      service.JWTService          = service.NewJWTService()	
+	authService     service.AuthService         = service.NewAuthService(userRepository)
 	authController  controllers.AuthController  = controllers.NewAuthController(authService, jwtService)
 )
 
