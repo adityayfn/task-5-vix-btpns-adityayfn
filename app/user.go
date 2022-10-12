@@ -8,7 +8,7 @@ type User struct {
 	Email    string `gorm:"type:varchar(255);UNIQUE" json:"email" binding:"required,email"`
 	Password string `gorm:"->;<-; not null" json:"-" binding:"required"`
 	Token    string `gorm:"-" json:"token,omitempty"`
-	Photos    *[]Photo `gorm:"constraint:OnUpdate:CASCADE, OnDelete:CASCADE" json:"photos,omitempty"`
-	CreatedAt time.Time `json:"-" json:"created_at"`
-	UpdatedAt time.Time `json:"-" json:"updated_at"`
+	Photos    *[]Photo `gorm:"constraint:OnUpdate:CASCADE, OnDelete:CASCADE" json:"photos,omitempty"`	
+	CreatedAt time.Time `json:"-" gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt time.Time `json:"-" gorm:"type:timestamp;default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
