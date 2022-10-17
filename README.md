@@ -1,5 +1,9 @@
 # task-5-vix-btpns-adityayfn
+<<<<<<< HEAD
 ============================
+=======
+# branch dev
+>>>>>>> dev
 <h3> .env example <h3>
 <ul>
   <li>DB_USER=database-username </li>
