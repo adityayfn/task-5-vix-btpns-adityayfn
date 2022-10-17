@@ -11,6 +11,7 @@ import (
 type UserRepository interface {
 	InsertUser(user app.User) app.User
 	UpdateUser(user app.User) app.User
+	DeleteUser(user app.User) 
 	VerifyCredential(email string, password string) interface{}
 	IsDuplicateEmail(email string) (tx *gorm.DB)
 	FindByEmail(email string) app.User
@@ -69,6 +70,9 @@ func (db *userConnection) ProfileUser(userID string) app.User {
 	var user app.User
 	db.connection.Preload("Photos").Preload("Photos.User").Find(&user, userID)
 	return user
+}
+func (db *userConnection) DeleteUser(user app.User)  {
+	db.connection.Delete(&user)
 }
 
 func hashAndSalt(pwd []byte) string {

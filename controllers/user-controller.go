@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/adityayfn/task-5-vix-btpns-adityayfn/app"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/helpers"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/models"
 	"github.com/adityayfn/task-5-vix-btpns-adityayfn/service"
@@ -15,6 +16,7 @@ import (
 type UserController interface {
 	Update(context *gin.Context)
 	Profile(context *gin.Context)
+	Delete(context *gin.Context)
 }
 
 type userController struct {
@@ -66,4 +68,18 @@ func (c *userController) Profile(context *gin.Context) {
 	res := helpers.BuildResponse(true, "success", user)
 	context.JSON(http.StatusOK, res)
 
+}
+
+func(c *userController) Delete(context *gin.Context){
+	var user app.User
+	id, err := strconv.ParseUint(context.Param("id"), 0, 0)
+	if err != nil {
+		response := helpers.BuildErrorResponse("Failed to get id", "No param id were found", helpers.EmptyObj{})
+		context.JSON(http.StatusBadRequest, response)
+	}
+
+	user.ID = id
+	c.userService.Delete(user)
+	res := helpers.BuildResponse(true, "Deleted", helpers.EmptyObj{})
+	context.JSON(http.StatusOK, res)
 }

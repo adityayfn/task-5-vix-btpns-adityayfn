@@ -12,6 +12,7 @@ import (
 type UserService interface {
 	Update(user models.UserUpdateModel) app.User
 	Profile(userID string) app.User
+	Delete(user app.User)
 }
 
 type userService struct {
@@ -36,4 +37,8 @@ func (service *userService) Update(user models.UserUpdateModel) app.User {
 
 func (service *userService) Profile(userID string) app.User {
 	return service.userRepository.ProfileUser(userID)
+}
+
+func (service *userService) Delete(user app.User) {
+	service.userRepository.DeleteUser(user)
 }
