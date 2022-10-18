@@ -34,12 +34,13 @@ func InitRoutes() *gin.Engine {
 	}
 	
 
-	userRoutes := router.Group("users", middlewares.AuthorizeJWT(jwtService))
+	userRoutes := router.Group("users",middlewares.AuthorizeJWT(jwtService))
 	{
 		userRoutes.GET("/profile", userController.Profile)
-		userRoutes.PUT("/profile", userController.Update)
+		userRoutes.PUT("/profile/:id", userController.Update)
+		userRoutes.DELETE("/:id",userController.Delete)
 	}
-	router.DELETE("delete/:id",userController.Delete)
+	
 
 	photoRoutes := router.Group("photos", middlewares.AuthorizeJWT(jwtService))
 	{
